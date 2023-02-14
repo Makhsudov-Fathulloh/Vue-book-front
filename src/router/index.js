@@ -17,9 +17,21 @@ const router = createRouter({
     },
 
     {
-      path: '/book-info',
+      path: '/book-info/:bookId',
       name: 'book-info',
       component: () => import('@/views/BookInfoPage.vue') // BookInfoPage ni import qilmasdan olish yoli
+    },
+
+    {
+      path: '/add-book',
+      name: 'add-book',
+      component: () => import('@/components/AddBook.vue')
+    },
+
+    {
+      path: '/edit-book/:bookId',
+      name: 'edit-book',
+      component: () => import('@/components/EditBook.vue')
     },
 
     {

@@ -32,7 +32,7 @@ export default {
             })
         },
 
-        pushBook(context, data) { // Kiton q'oshish actionsi
+        pushBook(context, data) { // Kitob q'oshish actionsi
             return new Promise((resolve, reject) => {
                 axios.post('http://localhost:8505/api/books', data)
                     .then((response) => { // .then true kelganda
@@ -50,7 +50,7 @@ export default {
             })
         },
 
-        fetchBook(context, bookId) { // Promise. Kitobni olish actionsi
+        fetchBook(context, bookId) { // Promise. Kitobni olish actioni
             return new Promise((resolve, reject) => {
                 axios.get( 'http://localhost:8505/api/books/' + bookId)
                     .then((response) => { // .then true kelganda
@@ -72,6 +72,42 @@ export default {
                     .catch((error) => { // .catch false kelganda
                         console.log('Kitob olishda xatolik')
                         console.log(error)
+                        reject()
+                    })
+            })
+        },
+
+        putBook(context, data) { // Kitob o'zgartirish actionsi
+            return new Promise((resolve, reject) => {
+                axios.put(`http://localhost:8505/api/books/${data.id}`, data)
+                    .then((response) => { // .then true kelganda
+                        console.log("Kitob o'zgartirildi")
+                        console.log(response)
+
+                        // Mutationsni toldiramiz
+                        context.commit('updateBook', response.data) // backandka qoshish
+                        resolve()
+                    })
+                    .catch(() => { // .catch false kelganda
+                        console.log("Kitob o'zgartirishda xatolik")
+                        reject()
+                    })
+            })
+        },
+
+        deleteBook(context, bookId) { // Kitob o'chirish actionsi
+            return new Promise((resolve, reject) => {
+                axios.delete('http://localhost:8505/api/books/' + bookId )
+                    .then((response) => { // .then true kelganda
+                        console.log("Kitob o'chirildi")
+                        console.log(response)
+
+                        // Mutationsni toldiramiz
+                        context.commit('updateOneBook', response.data) // backandka qoshish
+                        resolve()
+                    })
+                    .catch(() => { // .catch false kelganda
+                        console.log("Kitob o'chirishda xatolik")
                         reject()
                     })
             })
