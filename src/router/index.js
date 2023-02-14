@@ -13,6 +13,11 @@ const router = createRouter({
       path: '/book-info',
       name: 'book-info',
       component: () => import('@/views/BookInfoPage.vue') // BookInfoPage ni import qilmasdan olish yoli
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/components/LoginPage.vue')
     }
   ]
 })
