@@ -50,7 +50,7 @@ export default {
             })
         },
 
-        fetchBook(context, bookId) { // Promise. Kitobni olish actionsi
+        fetchBook(context, bookId) { // Promise. Kitobni olish actioni
             return new Promise((resolve, reject) => {
                 axios.get( 'http://localhost:8505/api/books/' + bookId)
                     .then((response) => { // .then true kelganda
