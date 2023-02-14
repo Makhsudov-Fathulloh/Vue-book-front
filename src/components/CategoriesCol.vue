@@ -3,21 +3,33 @@
   <div class="col-12 col-md-3 px-3 px-md-0">
 
     <div class="list-group">
-      <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-        The current link item
-      </a>
-      <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-      <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-      <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-      <a class="list-group-item list-group-item-action disabled">A disabled link item</a>
+      <router-link
+          v-for="category in getCategories"
+          :key="category.id"
+          :to="'/categories/' + category.id"
+          class="list-group-item list-group-item-action"
+      >
+        {{ category.name }}
+      </router-link>
     </div>
   </div>
 
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
+
 export default {
-  name: "CategoriesCol"
+  name: "CategoriesCol",
+  computed: {
+    ...mapGetters(['getCategories'])
+  },
+  methods: {
+    ...mapActions(['fetchCategories'])
+  },
+  mounted() {
+    this.fetchCategories() // mounted xar refreshda ishlaydi
+  }
 }
 </script>
 

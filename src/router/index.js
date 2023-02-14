@@ -9,11 +9,19 @@ const router = createRouter({
       name: 'home',
       component: HomePage
     },
+
+    {
+      path: '/categories/:id',
+      name: 'categories',
+      component: HomePage
+    },
+
     {
       path: '/book-info',
       name: 'book-info',
       component: () => import('@/views/BookInfoPage.vue') // BookInfoPage ni import qilmasdan olish yoli
     },
+
     {
       path: '/login',
       name: 'login',
