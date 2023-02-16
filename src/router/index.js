@@ -29,6 +29,12 @@ const router = createRouter({
     },
 
     {
+      path: '/edit-book/:bookId',
+      name: 'edit-book',
+      component: () => import('@/components/EditBook.vue')
+    },
+
+    {
       path: '/login',
       name: 'login',
       component: () => import('@/components/LoginPage.vue')

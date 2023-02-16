@@ -23,8 +23,14 @@
           >
             {{ book.name }}
           </h5>
-          <p class="card-text">{{ book.description.slice(0, 50) + '...' }}</p>
-          <router-link :to="'/book-info/' + book.id" class="btn btn-primary">Batafsil</router-link>
+          <p class="card-text">{{ book.description.slice(0, 50) + ' ...' }}</p>
+          <div class="d-flex justify-content-between">
+              <router-link :to="'/book-info/' + book.id" class="btn btn-sm btn-primary">Batafsil</router-link>
+              <router-link :to="'/edit-book/' + book.id" class="btn btn-sm btn-success">O'zgartirish</router-link>
+          </div>
+          <div class="text-end">
+            <button class="btn btn-sm btn-danger mt-4" @click="removeBook(book.id)">O'chirish</button>
+          </div>
         </div>
       </div>
     </div>
@@ -48,10 +54,18 @@ export default {
   },
 
   methods: {
-    ...mapActions(['fetchBooks']), // ushbu sahifaga kirganimizda fetchBooks chaqirilsin
+    ...mapActions(['fetchBooks', 'deleteBook']), // ushbu sahifaga kirganimizda fetchBooks chaqirilsin
     showMore() {
       this.show = !this.show
+    },
+    removeBook(bookId) {
+      this.deleteBook(bookId)
+          .then(() => {
+            alert("Kitob o'chirildi")
+            this.fetchBooks()
+          })
     }
+
   },
 
   watch: { // kuzatib turuvchi
