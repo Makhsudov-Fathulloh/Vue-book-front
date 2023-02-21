@@ -28,15 +28,16 @@
           <p class="card-text">{{ book.description.slice(0, 50) + ' ...' }}</p>
           <div class="d-flex justify-content-between">
 
+
               <app-button-link
                   :title="'Batafsil'"
-                  :go-to="'/book-info/${book.id}'"
+                  :go-to="`/book-info/${book.id}`"
                   :style="'btn-primary'"
               />
 
               <app-button-link
                   :title="'O\'zgartirish'"
-                  :go-to="'/edit-book/${book.id}'"
+                  :go-to="`/edit-book/${book.id}`"
                   :style="'btn-success'"
               />
 
@@ -61,7 +62,7 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import AppButton from "@/components/AppButtonLink.vue";
+import AppButton from "@/components/AppButton.vue";
 import AppButtonLink from "@/components/AppButtonLink.vue";
 
 export default {
@@ -109,4 +110,3 @@ export default {
 <style scoped>
 
 </style>
-
