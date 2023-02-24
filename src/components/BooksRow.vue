@@ -16,32 +16,48 @@
               class="card-title"
               @click="showMore"
           >
-            <span v-if="show">{{ book.name.slice(0, 9) + '...' }}</span>
-            <span v-else>{{ book.name }}</span>
-          </h5>
-          <h5
-              v-else
-              class="card-title"
-          >
-            {{ book.name }}
-          </h5>
-          <p class="card-text">{{ book.description.slice(0, 50) + ' ...' }}</p>
-          <div class="d-flex justify-content-between">
+
+              <span>{{ book.name }}</span>
+
+              <!--
+              <span v-if="show">{{ book.name.slice(0, 9) + '...' }}</span>
+              <span v-else>{{ book.name }}</span>  -->
+            </h5>
 
 
-              <app-button-link
-                  :title="'Batafsil'"
-                  :go-to="`/book-info/${book.id}`"
-                  :style="'btn-primary'"
-              />
+              <div class="card-text" v-if="selectedBook === book.id" @mouseover="selectedBook = book.id"
+              @mouseout="selectedBook = null">
+                  {{ book.description }}
+              </div>
 
-              <app-button-link
-                  :title="'O\'zgartirish'"
-                  :go-to="`/edit-book/${book.id}`"
-                  :style="'btn-success'"
-              />
+              <div class="card-text" v-else @mouseover="selectedBook = book.id" @mouseout="selectedBook = null">
+                  {{ book.description.split(' ').slice(0, 10).join(' ') }}
+              </div>
 
-<!--              <router-link :to="'/book-info/' + book.id" class="btn btn-sm btn-primary">Batafsil</router-link>-->
+              <div class="card-text" v-if="book.description > 30">
+                  {{ book.description + '...' }}
+              </div>
+
+            <!--
+            <p class="card-text">{{ book.description.slice(0, 50) + ' ...' }}</p> -->
+
+
+            <div class="d-flex justify-content-between">
+
+
+                <app-button-link
+                    :title="'Batafsil'"
+                    :go-to="`/book-info/${book.id}`"
+                    :style="'btn-primary'"
+                />
+
+                <app-button-link
+                    :title="'O\'zgartirish'"
+                    :go-to="`/edit-book/${book.id}`"
+                    :style="'btn-success'"
+                />
+
+  <!--              <router-link :to="'/book-info/' + book.id" class="btn btn-sm btn-primary">Batafsil</router-link>-->
 <!--              <router-link :to="'/edit-book/' + book.id" class="btn btn-sm btn-success">O'zgartirish</router-link>-->
           </div>
           <div class="text-end">
@@ -68,9 +84,11 @@ import AppButtonLink from "@/components/AppButtonLink.vue";
 export default {
   name: "BooksRow",
   components: {AppButton, AppButtonLink},
+
   data() {
     return {
-      show: true
+        show: true,
+        selectedBook : null
     }
   },
 

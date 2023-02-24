@@ -1,6 +1,6 @@
 <template>
   <div>
-       <router-link :to="goTo" class="btn btn-sm btn-primary">
+       <router-link :to="goTo" class="btn btn-sm" :class="style">
           {{ title }}
        </router-link>
   </div>
